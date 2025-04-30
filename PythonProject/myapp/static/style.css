@@ -1,0 +1,269 @@
+/* スマホ対応のベースデザイン */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+}
+
+input[type="file"] {
+    font-size: 1em;
+}
+
+input[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 投稿カード */
+.post-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 画像 */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1; /* 正方形っぽく揃える */
+}
+/* ボタンリンク */
+a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* -------- スマホサイズ -------- */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.2em;
+    }
+
+    form {
+        gap: 8px;
+    }
+
+    input[type="text"], input[type="file"], input[type="submit"] {
+        font-size: 0.9em;
+    }
+
+    .post-card {
+        padding: 10px;
+    }
+}
+
+/* ナビバー */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.navbar-left h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.navbar-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.navbar-right a:hover {
+    text-decoration: underline;
+}
+
+.post-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #ff0000;
+}
+
+/* 投稿ボタン */
+.post-btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.post-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 削除ボタン */
+.delete-btn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 500px; /* 最大幅を指定 */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 10px auto;
+}
+
+.post-text {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: left;
+    width: 90%;
+}
+
+.like-btn {
+    background-color: #fff0f0;
+    color: #e60023;
+    border: 1px solid #e60023;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.like-btn:hover {
+    background-color: #ffe6e6;
+}
+
+.sort-buttons {
+    margin-bottom: 15px;
+}
+
+.sort-buttons a {
+    margin-right: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sort-buttons a:hover {
+    text-decoration: underline;
+}
+
+.like-btn {
+    background-color: white;
+    border: 2px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 5px 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin-top: 8px;
+}
+
+.like-btn:hover {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    margin-top: 5%;
+    border-radius: 10px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
