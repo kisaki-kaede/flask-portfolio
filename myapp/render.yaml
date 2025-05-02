@@ -3,7 +3,7 @@ services:
     name: flask-portfolio
     env: python
     buildCommand: ""
-    startCommand: "gunicorn PythonProject.myapp.app:app"
+startCommand: "gunicorn myapp.app:app"
     envVars:
       - key: FLASK_ENV
         value: production
