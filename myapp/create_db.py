@@ -14,3 +14,4 @@ CREATE TABLE IF NOT EXISTS posts (
 
 conn.commit()
 conn.close()
+print("Creating posts table...")
