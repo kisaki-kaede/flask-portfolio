@@ -18,12 +18,11 @@
 
 <h3>メッセージ投稿</h3>
 <form method="POST" action="{{ url_for('post') }}">
-    <input type="text" name="content" placeholder="メッセージを書く...">
+    <input type="text" name="content" placeholder="メッセージを書く..." required>
     <input type="submit" value="投稿">
 </form>
 
 <h3>投稿一覧</h3>
-
 <div class="sort-buttons">
     <a href="{{ url_for('mypage', sort='new') }}">🕒 新着順</a>
     <a href="{{ url_for('mypage', sort='likes') }}">❤️ いいね順</a>
@@ -36,82 +35,39 @@
         {% if p.image %}
             <img src="{{ url_for('static', filename='uploads/' + p.image) }}" alt="uploaded image" class="post-image">
         {% endif %}
-
         {% if p.content %}
             <p>{{ p.content }}</p>
         {% endif %}
 
-        <!-- いいねボタン -->
-  <form method="POST" action="{{ url_for('like_post', post_id=p.id) }}" class="like-form">
-    <button type="submit" class="like-btn">♥ {{ p.likes or 0 }}</button>
-</form>
+        <form method="POST" action="{{ url_for('like_post', post_id=p.id) }}" class="like-form">
+            <button type="submit" class="like-btn">♥ {{ p.likes or 0 }}</button>
+        </form>
 
-        <!-- 削除ボタン -->
         <form method="POST" action="{{ url_for('delete_post', post_id=p.id) }}">
             <button type="submit" class="delete-btn">削除</button>
         </form>
     </div>
 {% endfor %}
 
-    ...
-
-    <div id="modal" class="modal" onclick="closeModal()">
-      <span class="modal-close">&times;</span>
-      <img class="modal-content" id="modal-img">
-    </div>
-
-    <script>
-      function openModal(src) {
-        document.getElementById("modal").style.display = "block";
-        document.getElementById("modal-img").src = src;
-      }
-
-      function closeModal() {
-        document.getElementById("modal").style.display = "none";
-      }
-    </script>
-
-<script>
-function likePost(postId) {
-    fetch(`/like/${postId}`, {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById(`like-count-${postId}`).innerText = data.likes;
-        }
-    });
-}
-</script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const likeForms = document.querySelectorAll(".like-form");
-
     likeForms.forEach(form => {
         form.addEventListener("submit", function (e) {
-            e.preventDefault();  // ページ遷移防止
-
-            fetch(form.action, {
-                method: "POST"
-            })
-            .then(response => response.json())
+            e.preventDefault();
+            fetch(form.action, { method: "POST" })
+            .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    // ボタンの中の数字を更新
-                    const likeBtn = form.querySelector("button");
-                    likeBtn.textContent = "♥ " + data.likes;
+                    form.querySelector("button").textContent = "♥ " + data.likes;
                 }
             });
         });
     });
 });
 </script>
-
 </body>
 </html>
-
 
 
 

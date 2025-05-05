@@ -1,24 +1,25 @@
 import sqlite3
 import os
 
-# Render用にパスを修正
+# デプロイ先のパスにも対応できるように絶対パスで指定
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, 'data.db')
 
+# DB接続とテーブル作成
 conn = sqlite3.connect(db_path)
 c = conn.cursor()
-
 c.execute('''
-CREATE TABLE IF NOT EXISTS posts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    message TEXT NOT NULL,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-)
+    CREATE TABLE IF NOT EXISTS posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user TEXT NOT NULL,
+        content TEXT NOT NULL,
+        image TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        likes INTEGER DEFAULT 0
+    )
 ''')
-
 conn.commit()
 conn.close()
-print("✅ posts テーブル作成完了")
 
+print("✅ postsテーブル作成完了")
 

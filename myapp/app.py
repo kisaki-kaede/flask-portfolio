@@ -30,6 +30,7 @@ def init_db():
     conn.close()
     print("✅ postsテーブル作成完了")
 
+
 init_db()
 
 # --- 仮ユーザー ---
@@ -51,6 +52,12 @@ def login():
         else:
             message = "ユーザー名またはパスワードが違います"
     return render_template("login.html", message=message)
+
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return redirect(url_for("login"))
+
 
 # --- マイページ ---
 @app.route("/mypage")

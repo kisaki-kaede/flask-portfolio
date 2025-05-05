@@ -9,7 +9,7 @@
     <h2>画像アップロード</h2>
 
     <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
-        <input type="file" name="画像"><br><br>
+        <input type="file" name="画像" required><br><br>
         <input type="text" name="content" placeholder="メッセージを書く..."><br><br>
         <input type="submit" value="アップロード">
     </form>
