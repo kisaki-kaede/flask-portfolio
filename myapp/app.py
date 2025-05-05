@@ -5,6 +5,12 @@ import os
 
 from werkzeug.utils import secure_filename
 
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'data.db')
+
+conn = sqlite3.connect(DB_PATH)
+
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "秘密のキー"
 
