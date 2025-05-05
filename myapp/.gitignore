@@ -1,0 +1,3 @@
+git add -f myapp/data.db
+git commit -m "force add data.db"
+git push

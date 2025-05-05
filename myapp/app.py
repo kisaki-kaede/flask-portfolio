@@ -5,13 +5,29 @@ import os
 
 from werkzeug.utils import secure_filename
 
-import sqlite3
-
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, 'data.db')
+import sqlite3
+from flask import Flask, render_template, request, redirect
 
-conn = sqlite3.connect(DB_PATH)
+app = Flask(__name__)
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.db')
+
+# 起動時にテーブル作成
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            message TEXT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "秘密のキー"
